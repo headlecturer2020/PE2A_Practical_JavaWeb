@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: server.TestwebApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 33.036 sec - in server.TestwebApplicationTests
