@@ -1,2 +1,0 @@
-# PE2A_Practical_JavaWeb
-PE2A_Practical_JavaWeb
