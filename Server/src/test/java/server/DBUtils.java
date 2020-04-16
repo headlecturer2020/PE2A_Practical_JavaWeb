@@ -25,6 +25,7 @@ public class DBUtils {
 
     // Add code get connection here
     public static boolean executeQuery(String sql) {
+        System.out.println("Connection" + con);
         PreparedStatement stm = null;
         ResultSet rs = null;
         boolean check = false;
@@ -56,6 +57,7 @@ public class DBUtils {
     }
 
     public static void executeUpdate(String sql) {
+        System.out.println("Connection" + con);
         PreparedStatement stm = null;
         try {
             //1. Connection
@@ -81,6 +83,7 @@ public class DBUtils {
     }
 
     public static void makeConnection(String url, String username, String password) {
+        System.out.println("Connection" + con);
         if (con == null && !url.equals("")) {
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -115,9 +118,10 @@ public class DBUtils {
         }
         return text;
     }
-    public static void closeConnection(){
+
+    public static void closeConnection() {
         try {
-            if(con !=null && !con.isClosed()){
+            if (con != null && !con.isClosed()) {
                 try {
                     con.close();
                 } catch (SQLException e) {
