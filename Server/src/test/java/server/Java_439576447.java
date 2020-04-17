@@ -69,7 +69,7 @@ class TestwebApplicationTests {
     @Order(1)
     public void checkConnection() {
         System.out.println("First question");
-            assertTrue(true);
+        assertTrue(true);
     }
 
     @Test
@@ -132,6 +132,7 @@ class TestwebApplicationTests {
                     String html = driver.findElement(By.tagName("body")).getText();
                     assertEquals(true, html.toLowerCase().contains("search page"));
                 } catch (Exception e) {
+                    System.out.println("Error" + e.getMessage());
                     assertFalse(true);
                 }
             }
@@ -149,19 +150,19 @@ class TestwebApplicationTests {
             if (!isLogin) {
                 assertFalse(true);
             } else {
-
-                driver.get("http://localhost:8080/login.html");
-                driver.findElement(By.name("txtUsername")).clear();
-                driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
-                driver.findElement(By.name("txtPassword")).clear();
-                driver.findElement(By.name("txtPassword")).sendKeys("1");
-                driver.findElement(By.name("btAction")).click();
                 try {
+                    driver.get("http://localhost:8080/login.html");
+                    driver.findElement(By.name("txtUsername")).clear();
+                    driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
+                    driver.findElement(By.name("txtPassword")).clear();
+                    driver.findElement(By.name("txtPassword")).sendKeys("1");
+                    driver.findElement(By.name("btAction")).click();
                     String html = driver.findElement(By.tagName("body")).getText();
                     boolean checkWelcome = html.toLowerCase().contains("loginsuccess");
                     boolean checkFullName = html.toLowerCase().contains("1");
                     assertEquals(true, checkFullName && checkWelcome);
                 } catch (Exception e) {
+                    System.out.println("Error" + e.getMessage());
                     assertFalse(true);
                 }
             }
@@ -177,16 +178,18 @@ class TestwebApplicationTests {
             if (!isLogin) {
                 assertFalse(true);
             } else {
-                driver.get("http://localhost:8080/login.html");
-                driver.findElement(By.name("txtUsername")).clear();
-                driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
-                driver.findElement(By.name("txtPassword")).clear();
-                driver.findElement(By.name("txtPassword")).sendKeys("1");
-                driver.findElement(By.name("btAction")).click();
                 try {
+                    driver.get("http://localhost:8080/login.html");
+                    driver.findElement(By.name("txtUsername")).clear();
+                    driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
+                    driver.findElement(By.name("txtPassword")).clear();
+                    driver.findElement(By.name("txtPassword")).sendKeys("1");
+                    driver.findElement(By.name("btAction")).click();
+
                     String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
                     assertEquals(true, html.contains("search page") && html.contains("am01"));
                 } catch (Exception e) {
+                    System.out.println("Error" + e.getMessage());
                     assertFalse(true);
                 }
             }
@@ -202,17 +205,17 @@ class TestwebApplicationTests {
             if (!isLogin) {
                 assertFalse(true);
             } else {
-                driver.get("http://localhost:8080/delete?idDelete=AM03&btAction=Delete");
-                boolean checkDB = DBUtils.executeQuery("SELECT amourId FROM tbl_Weapon Where  amourId = 'AM03'");
-                if (!checkDB) {
-                    try {
+                try {
+                    driver.get("http://localhost:8080/delete?idDelete=AM03&btAction=Delete");
+                    boolean checkDB = DBUtils.executeQuery("SELECT amourId FROM tbl_Weapon Where  amourId = 'AM03'");
+                    if (!checkDB) {
                         String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
-
                         assertEquals(true, html.contains("search page") && !html.contains("am03"));
-                    } catch (Exception e) {
+                    } else {
                         assertFalse(true);
                     }
-                } else {
+                } catch (Exception e) {
+                    System.out.println("Error" + e.getMessage());
                     assertFalse(true);
                 }
             }
@@ -228,12 +231,14 @@ class TestwebApplicationTests {
             if (!isLogin) {
                 assertFalse(true);
             } else {
-                driver.get("http://localhost:8080/logout");
                 try {
+                    driver.get("http://localhost:8080/logout");
+
                     String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
 
                     assertEquals(true, html.contains("login page"));
                 } catch (Exception e) {
+                    System.out.println("Error" + e.getMessage());
                     assertFalse(true);
                 }
             }
