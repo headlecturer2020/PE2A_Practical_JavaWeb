@@ -55,8 +55,9 @@ class TestwebApplicationTests {
     //
 
 
-    @AfterAll
+    @BeforeAll
     public static void initData() {
+        System.out.println("[LOADING] - Init data");
         String sql = "Insert into tbl_Weapon(amourId, description, classification, defense, timeOfCreate, status)" +
                 " Values ('AM01','AM01','AM01','AM01','2020-03-12','true')," +
                 "('AM02','AM02','AM02','AM02','2020-03-12','true'), " +
@@ -67,14 +68,14 @@ class TestwebApplicationTests {
     @Test
     @Order(1)
     public void checkConnection() {
-//        boolean check = DBUtils.checkMakeConnection();
-        Assert.assertEquals(true, true);
-
+        System.out.println("First question");
+            assertTrue(true);
     }
 
     @Test
     @Order(2)
     public void checkLoginDAOWithBoss() {
+        System.out.println("2 question");
         boolean checkLoginSuccess = TemplateQuestion.checkLogin("LoginSuccess", "1");
         boolean checkLoginFailed = TemplateQuestion.checkLogin("LoginFailed", "1");
         boolean checkLoginIsBoss = TemplateQuestion.checkLogin("LoginNotBoss", "1");
@@ -86,6 +87,8 @@ class TestwebApplicationTests {
     @Test
     @Order(3)
     public void showAllDAO() {
+        System.out.println("3 question");
+
         if (!isLogin) {
             assertFalse(true);
         } else {
@@ -97,6 +100,8 @@ class TestwebApplicationTests {
     @Test
     @Order(4)
     public void deleteDAO() {
+        System.out.println("4 question");
+
         if (!isLogin) {
             assertFalse(true);
         } else {
@@ -110,6 +115,8 @@ class TestwebApplicationTests {
     @Test
     @Order(5)
     public void testLoginUI() {
+        System.out.println("5 question");
+
         if (driver != null) {
             if (!isLogin) {
                 assertFalse(true);
@@ -136,6 +143,8 @@ class TestwebApplicationTests {
     @Test
     @Order(6)
     public void checkWelcomeWithName() {
+        System.out.println("6 question");
+
         if (driver != null) {
             if (!isLogin) {
                 assertFalse(true);

@@ -57,15 +57,12 @@ public class TblUserDAO {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-
         String sql = "select boss from tbl_User where userId = ?";
-
         try {
             con = DBUtilities.makeConnection();
             pstm = con.prepareStatement(sql);
             pstm.setString(1, username);
             rs = pstm.executeQuery();
-
             if (rs.next()) {
                 if (rs.getBoolean("boss")) {
                     check = true;

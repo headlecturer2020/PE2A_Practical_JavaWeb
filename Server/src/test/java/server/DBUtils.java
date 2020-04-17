@@ -32,11 +32,11 @@ public class DBUtils {
         Connection con = null;
         ResultSet rs = null;
         boolean check = false;
-        System.out.println(sql);
+        System.out.println("[SQL]: " + sql);
         try {
             //1. Connection
             con = DBUtilities.makeConnection();
-            System.out.println("executeQuery : " + con);
+            System.out.println("[ExecuteQuery] : " + con);
 
             if (con != null) {
                 //3. Create statement
@@ -49,7 +49,6 @@ public class DBUtils {
                 }//end while rs is not null
             }//end if con is not null
         } catch (Exception e) {
-		System.out.println(e);
             e.printStackTrace();
         } finally {
             try {
@@ -63,7 +62,6 @@ public class DBUtils {
                     con.close();
                 }
             } catch (Exception e) {
-System.out.println(e);
                 e.printStackTrace();
             }
         }
@@ -71,25 +69,23 @@ System.out.println(e);
     }
 
     public static void executeUpdate(String sql) {
-        System.out.println(sql);
+        System.out.println("[SQL]: " + sql);
         PreparedStatement stm = null;
         Connection con = null;
         try {
             con = DBUtilities.makeConnection();
-            System.out.println("executeUpdate : " + con);
+            System.out.println("[executeUpdate] : " + con);
             //1. Connection
             if (con != null && !sql.equals("")) {
                 //2. Create Sql String
                 //3. Create statement
                 stm = con.prepareStatement(sql);
                 //4. Execute Query
-                System.out.println("Row effected : " + stm.executeUpdate());
-                System.out.println("[FAILED]" + sql);
+                System.out.println("[Row effected] : " + stm.executeUpdate());
                 //5. Process
 
             }//end if con is not null
         } catch (Exception e) {
-System.out.println(e);
             e.printStackTrace();
         } finally {
             try {
@@ -100,7 +96,6 @@ System.out.println(e);
                     con.close();
                 }
             } catch (Exception e) {
-System.out.println(e);
                 e.printStackTrace();
             }
         }
