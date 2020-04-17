@@ -71,7 +71,6 @@ public class DBUtils {
         PreparedStatement stm = null;
         Connection con = null;
         try {
-
             con = DBUtilities.makeConnection();
             System.out.println("executeUpdate : " + con);
             //1. Connection
@@ -80,7 +79,7 @@ public class DBUtils {
                 //3. Create statement
                 stm = con.prepareStatement(sql);
                 //4. Execute Query
-                stm.executeUpdate();
+                System.out.println("Row effected : " + stm.executeUpdate());
                 //5. Process
 
             }//end if con is not null
@@ -105,6 +104,7 @@ public class DBUtils {
         boolean check = true;
         String connectionContextStr = "";
         connectionContextStr = readFileAsString(PATH_CONTEXT_FILE).trim();
+        System.out.println(connectionContextStr);
         if (!connectionContextStr.contains("com.microsoft.sqlserver.jdbc.SQLServerDriver")) {
             check = false;
         }

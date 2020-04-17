@@ -45,7 +45,7 @@ class TestwebApplicationTests {
         if (options == null) {
             options = new ChromeOptions();
             if (driver == null) {
-                options.addArguments("--headless");
+//                options.addArguments("--headless");
                 driver = new ChromeDriver(options);
                 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             }
