@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestwebApplicationTests {
 
-    //check
     public static String questionPointStr = "checkConnection:2-" +
             "checkLoginDAOWithBoss:1-" +
             "showAllDAO:1.5-" +
@@ -43,21 +42,18 @@ class TestwebApplicationTests {
     public TestwebApplicationTests() {
         //  System.setProperty("webdriver.ie.driver", "src/main/resources/static/IEDriverServer.exe");
         System.setProperty("webdriver.chrome.driver", "src/main/resources/static/chromedriver2.exe");
-
         if (options == null) {
             options = new ChromeOptions();
             if (driver == null) {
-//                options.addArguments("--headless");
+                options.addArguments("--headless");
                 driver = new ChromeDriver(options);
                 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             }
         }
     }
 
-    @BeforeAll
-    public static void setUp() {
-        DBUtils.makeConnection("jdbc:sqlserver://sql5047.site4now.net:1433;databaseName=DB_A57F77_pe2aproject;", "DB_A57F77_pe2aproject_admin", "faker01@123");
-    }
+    //
+
 
     @Test
     @Order(1)
@@ -111,10 +107,11 @@ class TestwebApplicationTests {
     @Test
     @Order(5)
     public void testLoginUI() {
-        if (!isLogin) {
-            assertFalse(true);
-        } else {
-            if (driver != null) {
+        if (driver != null) {
+            if (!isLogin) {
+                assertFalse(true);
+            } else {
+
                 driver.get("http://localhost:8080/login.html");
                 driver.findElement(By.name("txtUsername")).clear();
                 driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
@@ -128,16 +125,19 @@ class TestwebApplicationTests {
                     assertFalse(true);
                 }
             }
+        } else {
+            assertFalse(true);
         }
     }
 
     @Test
     @Order(6)
     public void checkWelcomeWithName() {
-        if (!isLogin) {
-            assertFalse(true);
-        } else {
-            if (driver != null) {
+        if (driver != null) {
+            if (!isLogin) {
+                assertFalse(true);
+            } else {
+
                 driver.get("http://localhost:8080/login.html");
                 driver.findElement(By.name("txtUsername")).clear();
                 driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
@@ -153,16 +153,18 @@ class TestwebApplicationTests {
                     assertFalse(true);
                 }
             }
+        } else {
+            assertFalse(true);
         }
     }
 
     @Test
     @Order(7)
     public void showAllUI() {
-        if (!isLogin) {
-            assertFalse(true);
-        } else {
-            if (driver != null) {
+        if (driver != null) {
+            if (!isLogin) {
+                assertFalse(true);
+            } else {
                 driver.get("http://localhost:8080/login.html");
                 driver.findElement(By.name("txtUsername")).clear();
                 driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
@@ -176,52 +178,57 @@ class TestwebApplicationTests {
                     assertFalse(true);
                 }
             }
-        }
-    }
-
-    @Test
-    @Order(7)
-    public void deleteUI() {
-        if (!isLogin) {
-            assertFalse(true);
         } else {
-            driver.get("http://localhost:8080/delete?idDelete=AM03&btAction=Delete");
-            boolean checkDB = DBUtils.executeQuery("SELECT amourId FROM tbl_Weapon Where  amourId = 'AM03'");
-            if (!checkDB) {
-                try {
-                    String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
-
-                    assertEquals(true, html.contains("search page") && !html.contains("am03"));
-                } catch (Exception e) {
-                    assertFalse(true);
-                }
-            } else {
-                assertFalse(true);
-            }
+            assertFalse(true);
         }
     }
 
     @Test
     @Order(8)
-    public void testLogOut() {
-        if (!isLogin) {
-            assertFalse(true);
-        } else {
-            driver.get("http://localhost:8080/logout");
-            try {
-                String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
-
-                assertEquals(true, html.contains("login page"));
-            } catch (Exception e) {
+    public void deleteUI() {
+        if (driver != null) {
+            if (!isLogin) {
                 assertFalse(true);
+            } else {
+                driver.get("http://localhost:8080/delete?idDelete=AM03&btAction=Delete");
+                boolean checkDB = DBUtils.executeQuery("SELECT amourId FROM tbl_Weapon Where  amourId = 'AM03'");
+                if (!checkDB) {
+                    try {
+                        String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
+
+                        assertEquals(true, html.contains("search page") && !html.contains("am03"));
+                    } catch (Exception e) {
+                        assertFalse(true);
+                    }
+                } else {
+                    assertFalse(true);
+                }
             }
+        } else {
+            assertFalse(true);
+        }
+    }
+
+    @Test
+    @Order(9)
+    public void testLogOut() {
+        if (driver != null) {
+            if (!isLogin) {
+                assertFalse(true);
+            } else {
+                driver.get("http://localhost:8080/logout");
+                try {
+                    String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
+
+                    assertEquals(true, html.contains("login page"));
+                } catch (Exception e) {
+                    assertFalse(true);
+                }
+            }
+        } else {
+            assertFalse(true);
         }
         DBUtils.executeUpdate("Delete From tbl_Weapon");
     }
 
-    @AfterAll
-    public static void clear() {
-        // Close if connection is existed
-        DBUtils.closeConnection();
-    }
 }
