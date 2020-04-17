@@ -32,6 +32,7 @@ public class DBUtils {
         Connection con = null;
         ResultSet rs = null;
         boolean check = false;
+        System.out.println(sql);
         try {
             //1. Connection
             con = DBUtilities.makeConnection();
@@ -48,6 +49,7 @@ public class DBUtils {
                 }//end while rs is not null
             }//end if con is not null
         } catch (Exception e) {
+		System.out.println(e);
             e.printStackTrace();
         } finally {
             try {
@@ -61,6 +63,7 @@ public class DBUtils {
                     con.close();
                 }
             } catch (Exception e) {
+System.out.println(e);
                 e.printStackTrace();
             }
         }
@@ -68,6 +71,7 @@ public class DBUtils {
     }
 
     public static void executeUpdate(String sql) {
+        System.out.println(sql);
         PreparedStatement stm = null;
         Connection con = null;
         try {
@@ -80,10 +84,12 @@ public class DBUtils {
                 stm = con.prepareStatement(sql);
                 //4. Execute Query
                 System.out.println("Row effected : " + stm.executeUpdate());
+                System.out.println("[FAILED]" + sql);
                 //5. Process
 
             }//end if con is not null
         } catch (Exception e) {
+System.out.println(e);
             e.printStackTrace();
         } finally {
             try {
@@ -94,6 +100,7 @@ public class DBUtils {
                     con.close();
                 }
             } catch (Exception e) {
+System.out.println(e);
                 e.printStackTrace();
             }
         }
