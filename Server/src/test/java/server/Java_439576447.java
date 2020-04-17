@@ -60,13 +60,11 @@ class TestwebApplicationTests {
     public void checkConnection() {
         boolean check = DBUtils.checkMakeConnection();
         Assert.assertEquals(true, check);
-        if (check) {
-            String sql = "Insert into tbl_Weapon(amourId, description, classification, defense, timeOfCreate, status)" +
-                    " Values ('AM01','AM01','AM01','AM01','2020-03-12','true')," +
-                    "('AM02','AM02','AM02','AM02','2020-03-12','true'), " +
-                    "('AM03','AM03','AM03','AM03','2020-03-12','true')";
-            DBUtils.executeUpdate(sql);
-        }
+        String sql = "Insert into tbl_Weapon(amourId, description, classification, defense, timeOfCreate, status)" +
+                " Values ('AM01','AM01','AM01','AM01','2020-03-12','true')," +
+                "('AM02','AM02','AM02','AM02','2020-03-12','true'), " +
+                "('AM03','AM03','AM03','AM03','2020-03-12','true')";
+        DBUtils.executeUpdate(sql);
     }
 
     @Test
