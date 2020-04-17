@@ -1,6 +1,9 @@
 package server;
 
 
+import com.practicalexam.student.connection.DBUtilities;
+
+import javax.naming.NamingException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +12,7 @@ import java.sql.*;
 
 public class DBUtils {
 
-    static Connection con = null;
+
     private static String PROJECT_DIR = System.getProperty("user.dir");
     private static String PATH_CONTEXT_FILE = PROJECT_DIR +
             File.separator
@@ -25,12 +28,15 @@ public class DBUtils {
 
     // Add code get connection here
     public static boolean executeQuery(String sql) {
-        System.out.println("Connection" + con);
         PreparedStatement stm = null;
+        Connection con = null;
         ResultSet rs = null;
         boolean check = false;
         try {
             //1. Connection
+            con = DBUtilities.makeConnection();
+            System.out.println("executeQuery : " + con);
+
             if (con != null) {
                 //3. Create statement
                 stm = con.prepareStatement(sql);
@@ -42,6 +48,7 @@ public class DBUtils {
                 }//end while rs is not null
             }//end if con is not null
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 if (rs != null) {
@@ -50,18 +57,25 @@ public class DBUtils {
                 if (stm != null) {
                     stm.close();
                 }
+                if (con != null) {
+                    con.close();
+                }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return check;
     }
 
     public static void executeUpdate(String sql) {
-        System.out.println("Connection" + con);
         PreparedStatement stm = null;
+        Connection con = null;
         try {
+
+            con = DBUtilities.makeConnection();
+            System.out.println("executeUpdate : " + con);
             //1. Connection
-            if (con != null) {
+            if (con != null && !sql.equals("")) {
                 //2. Create Sql String
                 //3. Create statement
                 stm = con.prepareStatement(sql);
@@ -77,22 +91,15 @@ public class DBUtils {
                 if (stm != null) {
                     stm.close();
                 }
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    public static void makeConnection(String url, String username, String password) {
-        System.out.println("Connection" + con);
-        if (con == null && !url.equals("")) {
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                con = DriverManager.getConnection(url, username, password);
+                if (con != null) {
+                    con.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     public static boolean checkMakeConnection() {
         boolean check = true;
@@ -119,18 +126,5 @@ public class DBUtils {
         return text;
     }
 
-    public static void closeConnection() {
-        try {
-            if (con != null && !con.isClosed()) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                ;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

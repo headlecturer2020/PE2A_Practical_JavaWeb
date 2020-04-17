@@ -61,10 +61,10 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
     public static StudentPointDto getStudentPointGenerated() {
         StudentPointDto dto = new StudentPointDto();
         String studentCode = getStudentCode();
-        String resultPath = PROJECT_DIR.replace("\\Server", "") + File.separator + TXT_RESULT_NAME;
+        String path = PROJECT_DIR + File.separator + TXT_RESULT_NAME;
         String startString = "Start" + studentCode;
         String endString = "End" + studentCode;
-        String str = readFileAsString(resultPath);
+        String str = readFileAsString(path);
         System.out.println(str);
         int startIndex = str.indexOf(startString);
         int endIndex = str.indexOf(endString);
@@ -116,11 +116,12 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
             if (studentPointDto == null) {
                 studentPointDto = new StudentPointDto();
             }
+            System.out.println("Error occured");
             studentPointDto.setStudentCode(getStudentCode());
             studentPointDto.setErrorMsg("System error!");
         } finally {
             try {
-                String resultPath = PROJECT_DIR.replace("\\Server", "") + File.separator + TXT_RESULT_NAME;
+                String resultPath = PROJECT_DIR + File.separator + TXT_RESULT_NAME;
                 String startString = "Start" + studentPointDto.getStudentCode();
                 String endString = "End" + studentPointDto.getStudentCode();
                 String str = readFileAsString(resultPath);
@@ -199,6 +200,7 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
 
     public static String getStudentCode() {
         String path = PATH_JAVA_FOLDER_TEST;
+        System.out.println(path);
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {

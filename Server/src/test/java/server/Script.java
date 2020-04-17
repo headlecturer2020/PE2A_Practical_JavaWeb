@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestwebApplicationTests {
 
+    //check
     public static String questionPointStr = "checkConnection:2-" +
             "checkLoginDAOWithBoss:1-" +
             "showAllDAO:1.5-" +
@@ -52,8 +53,6 @@ class TestwebApplicationTests {
             }
         }
     }
-
-    //
 
     @BeforeAll
     public static void setUp() {
@@ -112,11 +111,10 @@ class TestwebApplicationTests {
     @Test
     @Order(5)
     public void testLoginUI() {
-        if (driver != null) {
-            if (!isLogin) {
-                assertFalse(true);
-            } else {
-
+        if (!isLogin) {
+            assertFalse(true);
+        } else {
+            if (driver != null) {
                 driver.get("http://localhost:8080/login.html");
                 driver.findElement(By.name("txtUsername")).clear();
                 driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
@@ -130,19 +128,16 @@ class TestwebApplicationTests {
                     assertFalse(true);
                 }
             }
-        } else {
-            assertFalse(true);
         }
     }
 
     @Test
     @Order(6)
     public void checkWelcomeWithName() {
-        if (driver != null) {
-            if (!isLogin) {
-                assertFalse(true);
-            } else {
-
+        if (!isLogin) {
+            assertFalse(true);
+        } else {
+            if (driver != null) {
                 driver.get("http://localhost:8080/login.html");
                 driver.findElement(By.name("txtUsername")).clear();
                 driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
@@ -158,18 +153,16 @@ class TestwebApplicationTests {
                     assertFalse(true);
                 }
             }
-        } else {
-            assertFalse(true);
         }
     }
 
     @Test
     @Order(7)
     public void showAllUI() {
-        if (driver != null) {
-            if (!isLogin) {
-                assertFalse(true);
-            } else {
+        if (!isLogin) {
+            assertFalse(true);
+        } else {
+            if (driver != null) {
                 driver.get("http://localhost:8080/login.html");
                 driver.findElement(By.name("txtUsername")).clear();
                 driver.findElement(By.name("txtUsername")).sendKeys("LoginSuccess");
@@ -183,56 +176,45 @@ class TestwebApplicationTests {
                     assertFalse(true);
                 }
             }
-        } else {
+        }
+    }
+
+    @Test
+    @Order(7)
+    public void deleteUI() {
+        if (!isLogin) {
             assertFalse(true);
+        } else {
+            driver.get("http://localhost:8080/delete?idDelete=AM03&btAction=Delete");
+            boolean checkDB = DBUtils.executeQuery("SELECT amourId FROM tbl_Weapon Where  amourId = 'AM03'");
+            if (!checkDB) {
+                try {
+                    String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
+
+                    assertEquals(true, html.contains("search page") && !html.contains("am03"));
+                } catch (Exception e) {
+                    assertFalse(true);
+                }
+            } else {
+                assertFalse(true);
+            }
         }
     }
 
     @Test
     @Order(8)
-    public void deleteUI() {
-        if (driver != null) {
-            if (!isLogin) {
-                assertFalse(true);
-            } else {
-                driver.get("http://localhost:8080/delete?idDelete=AM03&btAction=Delete");
-                boolean checkDB = DBUtils.executeQuery("SELECT amourId FROM tbl_Weapon Where  amourId = 'AM03'");
-                if (!checkDB) {
-                    try {
-                        String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
-
-                        assertEquals(true, html.contains("search page") && !html.contains("am03"));
-                    } catch (Exception e) {
-                        assertFalse(true);
-                    }
-                } else {
-                    assertFalse(true);
-                }
-            }
-        } else {
-            assertFalse(true);
-        }
-    }
-
-    @Test
-    @Order(9)
     public void testLogOut() {
-        if (driver != null) {
-            if (!isLogin) {
-                assertFalse(true);
-            } else {
-
-                driver.get("http://localhost:8080/logout");
-                try {
-                    String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
-
-                    assertEquals(true, html.contains("login page"));
-                } catch (Exception e) {
-                    assertFalse(true);
-                }
-            }
-        } else {
+        if (!isLogin) {
             assertFalse(true);
+        } else {
+            driver.get("http://localhost:8080/logout");
+            try {
+                String html = driver.findElement(By.tagName("body")).getText().toLowerCase();
+
+                assertEquals(true, html.contains("login page"));
+            } catch (Exception e) {
+                assertFalse(true);
+            }
         }
         DBUtils.executeUpdate("Delete From tbl_Weapon");
     }
