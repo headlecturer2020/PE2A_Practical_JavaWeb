@@ -96,7 +96,7 @@ public class FilterDispatcher implements Filter {
                 url = bundle.getString(label);
             } catch (Exception e) {
                 log("Exception: " + e.getMessage());
-                url = "fileNotFound.jsp";
+                url = "fileNotFound.html";
             }
             RequestDispatcher rd = req.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -2,8 +2,11 @@ package com.practicalexam.student;
 
 import com.practicalexam.student.tblUser.TblUserDAO;
 import com.practicalexam.student.tblWeapon.TblWeaponDAO;
+import org.springframework.stereotype.Service;
+
 import java.io.Serializable;
 
+@Service
 public class TemplateQuestion implements Serializable {
 
     private static TblUserDAO userDao = new TblUserDAO();

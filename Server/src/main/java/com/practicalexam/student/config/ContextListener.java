@@ -21,7 +21,7 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext sctx = sce.getServletContext();
-ResourceBundle bundle = ResourceBundle.getBundle("config");
+        ResourceBundle bundle = ResourceBundle.getBundle("config");
         sctx.setAttribute("CONFIG", bundle);
     }
 
