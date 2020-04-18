@@ -25,13 +25,12 @@ public class DBUtilities implements Serializable {
         // Add code get connection here
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://sql5047.site4now.net:1433;databaseName=DB_A57F77_pe2aproject;";
-            con = DriverManager.getConnection(url, "DB_A57F77_pe2aproject_admin", "faker01@123");
+            String url = "jdbc:sqlserver://qualic.database.windows.net:1433;databaseName=PracticalTest;";
+            con = DriverManager.getConnection(url, "Aqualic_admin@qualic", "thien@fpt1998");
         } catch (Exception e) {
             e.printStackTrace();
         }
         //
-        System.out.println("[Check connection]" + con);
         return con;
     }
 
