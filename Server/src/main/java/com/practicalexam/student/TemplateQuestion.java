@@ -1,54 +1,35 @@
 package com.practicalexam.student;
 
-import com.practicalexam.student.tblUser.TblUserDAO;
-import com.practicalexam.student.tblWeapon.TblWeaponDAO;
-import org.springframework.stereotype.Service;
+/**
+ *
+ * @author FPT University - HCMC
+ * Java OOP Practical Exam Template
+ */
 
-import java.io.Serializable;
+public class TemplateQuestion {
 
-@Service
-public class TemplateQuestion implements Serializable {
+    // DO NOT MODIFY THIS FILE - KHÔNG SỬA NỘI DUNG CỦA FILE NÀY - HOẶC BẠN SẼ BỊ RỚT
+    
+    public Cabinet cabinet = new Cabinet();
 
-    private static TblUserDAO userDao = new TblUserDAO();
-    private static TblWeaponDAO weaponDao = new TblWeaponDAO();
-
-    public static boolean checkLogin(String username, String password) {
-        boolean check = false;
-        try {
-            // Student Call function
-            boolean checkLogin = userDao.checkLogin(username, password);
-            if (checkLogin) {
-                check = userDao.checkBoss(username);
-            }
-            //
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return check;
+    public void insert() {
+        cabinet.add();
     }
 
-    public static boolean delete(String armorId) {
-        boolean check = false;
-        try {
-            // Student call function
-            check = weaponDao.deleteAmour(armorId);
-            //
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return check;
+    public void update() {
+        cabinet.update();
     }
 
-    public static int showAll() {
-        int result = -1;
-        try {
-            // Student call function
-            result = weaponDao.showAll();
-            //
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+    public void search() {
+        cabinet.search();
+    }
+
+    public void remove() {
+        cabinet.remove();
+    }
+
+    public void sort() {
+        cabinet.sort();
     }
 
 }
