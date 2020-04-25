@@ -61,7 +61,7 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
     public static StudentPointDto getStudentPointGenerated() {
         StudentPointDto dto = new StudentPointDto();
         String studentCode = getStudentCode();
-        String path = PROJECT_DIR.replace("\\Server", "") + File.separator + TXT_RESULT_NAME;
+        String path = PROJECT_DIR + File.separator + TXT_RESULT_NAME;
         String startString = "Start" + studentCode;
         String endString = "End" + studentCode;
         String str = readFileAsString(path);
@@ -71,7 +71,7 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
         if (startIndex >= 0 && endIndex > 0) {
             String json = str.substring(startIndex + startString.length(), endIndex);
             try {
-                return objectMapper.readValue(json, StudentPointDto.class);
+               return objectMapper.readValue(json, StudentPointDto.class);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
@@ -121,18 +121,17 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
             studentPointDto.setErrorMsg("System error!");
         } finally {
             try {
-                String path = PROJECT_DIR.replace("\\Server", "") + File.separator + TXT_RESULT_NAME;
-
+                String resultPath = PROJECT_DIR + File.separator + TXT_RESULT_NAME;
                 String startString = "Start" + studentPointDto.getStudentCode();
                 String endString = "End" + studentPointDto.getStudentCode();
-                String str = readFileAsString(path);
+                String str = readFileAsString(resultPath);
                 int startIndex = str.indexOf(startString);
                 int endIndex = str.indexOf(endString);
                 if (startIndex >= 0 && endIndex > 0) {
                     String toBeReplaced = str.substring(startIndex, endIndex + endString.length());
                     str = str.replace(toBeReplaced, "");
                 }
-                writer = new FileWriter(path);
+                writer = new FileWriter(resultPath);
                 // convert student point object to JSON
                 String studentPointJson = objectMapper.writeValueAsString(studentPointDto);
                 if (writer != null) {
