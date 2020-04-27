@@ -173,7 +173,7 @@ class TestwebApplicationTests {
                 if (!checkDB) {
                     try {
                         String html = driver.findElement(By.tagName("body")).getText();
-                        assertEquals(true, html.contains("search page") && !html.contains("am03"));
+                        assertEquals(true, html.toLowerCase().contains("search page") && !html.toLowerCase().contains("am03"));
                     } catch (Exception e) {
                         assertFalse(true);
                     }
