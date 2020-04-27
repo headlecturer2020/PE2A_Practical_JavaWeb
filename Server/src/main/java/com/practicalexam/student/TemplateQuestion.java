@@ -5,7 +5,7 @@ import com.practicalexam.student.tblWeapon.TblWeaponDAO;
 import java.io.Serializable;
 
 public class TemplateQuestion implements Serializable {
-
+ 
 
     private static TblUserDAO userDao = new TblUserDAO();
     private static TblWeaponDAO weaponDao = new TblWeaponDAO();
