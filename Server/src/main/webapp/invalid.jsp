@@ -12,7 +12,6 @@ and open the template in the editor.
     </head>
     <body>
         <font color="red">
-
             Invalid username or password or user is not boss !!!
         </font>
         <br/>
