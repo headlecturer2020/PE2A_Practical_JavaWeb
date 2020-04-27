@@ -13,6 +13,7 @@ public class TemplateQuestion implements Serializable {
     public static boolean checkLogin(String username, String password) {
         boolean check = false;
         try {
+
             // Student Call function
             boolean checkLogin = userDao.checkLogin(username, password);
             if (checkLogin) {

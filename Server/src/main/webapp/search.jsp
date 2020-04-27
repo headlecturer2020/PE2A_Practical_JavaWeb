@@ -13,6 +13,7 @@
         <title>Search</title>
     </head>
     <body>
+
         <font color="red">
         Welcome, ${sessionScope.FULLNAME}
         </font>
