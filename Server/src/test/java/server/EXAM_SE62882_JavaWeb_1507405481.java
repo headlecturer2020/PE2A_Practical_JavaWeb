@@ -27,7 +27,7 @@ class TestwebApplicationTests {
     public static WebDriver driver;
     //public static InternetExplorerOptions options;
     public static ChromeOptions options;
-    boolean isLogin  = false;
+    static boolean isLogin  = false;
 
     public TestwebApplicationTests() {
         //  System.setProperty("webdriver.ie.driver", "src/main/resources/static/IEDriverServer.exe");
