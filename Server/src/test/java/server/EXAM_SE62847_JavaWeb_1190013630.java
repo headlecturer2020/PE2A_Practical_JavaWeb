@@ -60,6 +60,7 @@ class TestwebApplicationTests {
         boolean checkLoginSuccess = TemplateQuestion.checkLogin("LoginSuccess", "1");
         boolean checkLoginFailed = TemplateQuestion.checkLogin("LoginFailed", "1");
         boolean checkLoginIsBoss = TemplateQuestion.checkLogin("LoginNotBoss", "1");
+  	isLogin = checkLoginSuccess && !checkLoginFailed;
         assertEquals(true, checkLoginSuccess && !checkLoginFailed && !checkLoginIsBoss);
     }
 
