@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Dell
  */
-@Component
 public class FilterDispatcher implements Filter {
 
     private static final boolean debug = true;
