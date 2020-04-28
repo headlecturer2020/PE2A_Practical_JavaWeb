@@ -12,12 +12,10 @@ and open the template in the editor.
     </head>
     <body>
         <h1>Login Page</h1>
-
         <form action="login" method="POST">
             Username <input type="text" name="txtUsername" value="" /><br/>
             Password <input type="password" name="txtPassword" value="" /><br/>
             <input type="submit" value="Login" name="btAction" />
-
         </form>
     </body>
 </html>

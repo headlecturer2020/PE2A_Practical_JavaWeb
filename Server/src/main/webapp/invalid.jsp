@@ -14,7 +14,6 @@ and open the template in the editor.
         <font color="red">
             Invalid username or password or user is not boss !!!
         </font>
-
         <br/>
         <a href="try">Click here to try again !</a>
     </body>
