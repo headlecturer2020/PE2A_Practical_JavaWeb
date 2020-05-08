@@ -118,7 +118,9 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
                 studentPointDto = new StudentPointDto();
             }
             System.out.println("Error occured");
+            studentPointDto.setEvaluateTime(getCurTime());
             studentPointDto.setStudentCode(getStudentCode());
+            System.out.println(e.getMessage() + "------ afterAll ------------------");
             studentPointDto.setErrorMsg("System error!");
         } finally {
             try {
@@ -183,6 +185,7 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
                 }
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage() + "------ setResult ------------------");
             e.printStackTrace();
         }
         // Send TCP messages to Lec-app after finish evaluate
@@ -201,28 +204,33 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
     }
 
     public static String getStudentCode() {
-        String path = PATH_JAVA_FOLDER_TEST;
-        System.out.println(path);
-        File folder = new File(path);
-        System.out.println("----------------------------");
-        File[] listOfFiles = folder.listFiles();
-        System.out.println(listOfFiles.length);
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                String s = file.getName();
-                System.out.println("File name: "+s);
-                if (s.contains(PREFIX_TEST)) {
-                    String[] arr = s.split("_");
-                    if(arr != null && arr.length >0){
-                        for (int i = 0; i < arr.length; i++) {
-                            System.out.println("Arr: "+arr[i]);
+        try {
+            String path = PATH_JAVA_FOLDER_TEST;
+            System.out.println(path);
+            File folder = new File(path);
+            System.out.println("----------------------------");
+            File[] listOfFiles = folder.listFiles();
+            System.out.println(listOfFiles.length);
+            for (File file : listOfFiles) {
+                if (file.isFile()) {
+                    String s = file.getName();
+                    System.out.println("File name: " + s);
+                    if (s.contains(PREFIX_TEST)) {
+                        String[] arr = s.split("_");
+                        if (arr != null && arr.length > 0) {
+                            for (int i = 0; i < arr.length; i++) {
+                                System.out.println("Arr: " + arr[i]);
+                            }
+                            return arr[1];
                         }
-                        return arr[1];
                     }
                 }
             }
+            System.out.println("----------------------------");
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "------ getStudentCode ------------------");
+            e.printStackTrace();
         }
-        System.out.println("----------------------------");
         return "";
     }
 
