@@ -204,16 +204,25 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
         String path = PATH_JAVA_FOLDER_TEST;
         System.out.println(path);
         File folder = new File(path);
+        System.out.println("----------------------------");
         File[] listOfFiles = folder.listFiles();
+        System.out.println(listOfFiles.length);
         for (File file : listOfFiles) {
             if (file.isFile()) {
                 String s = file.getName();
+                System.out.println("File name: "+s);
                 if (s.contains(PREFIX_TEST)) {
                     String[] arr = s.split("_");
-                    return arr[1];
+                    if(arr != null && arr.length >0){
+                        for (int i = 0; i < arr.length; i++) {
+                            System.out.println("Arr: "+arr[i]);
+                        }
+                        return arr[1];
+                    }
                 }
             }
         }
+        System.out.println("----------------------------");
         return "";
     }
 
