@@ -48,7 +48,7 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
                             if (isCorrect) {
                                 point = Double.parseDouble(arr[1]);
                             }
-                            testResultsStatus.put(questionName + "-" + arr[1], point);
+                            testResultsStatus.put(questionName + "-" + arr[1] + ".0", point);
                             break;
                         }
                     }
