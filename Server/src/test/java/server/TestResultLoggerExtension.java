@@ -113,6 +113,7 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
         try {
             studentPointDto = setResult(studentPointDto);
         } catch (Exception e) {
+            System.out.println(e.printStackTrace());
             if (studentPointDto == null) {
                 studentPointDto = new StudentPointDto();
             }
