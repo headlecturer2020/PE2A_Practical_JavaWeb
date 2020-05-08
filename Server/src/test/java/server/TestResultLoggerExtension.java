@@ -170,18 +170,24 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
         double totalPoint = 0;
         Integer correctQuestionCount = 0;
         String studentCode = getStudentCode();
+        System.out.println(studentCode + "--- Student code");
         try {
-            for (Map.Entry<String, Double> entry : testResultsStatus.entrySet()) {
-                String[] temp = entry.getKey().split("-");
-                String questionName = temp[0];
-                String point = temp[1];
-                Double pointCorrect = entry.getValue();
-                if (entry.getValue() > 0.0) {
-                    totalPoint += entry.getValue();
-                    correctQuestionCount++;
-                    listQuestions.put(questionName + ":Success", pointCorrect + "/" + point);
-                } else {
-                    listQuestions.put(entry.getKey() + ":Failed", "0/" + point);
+            if (testResultsStatus != null && testResultsStatus.size() > 0) {
+                System.out.println(testResultsStatus + "testResultsStatus");
+                for (Map.Entry<String, Double> entry : testResultsStatus.entrySet()) {
+                    String[] temp = entry.getKey().split("-");
+                    if (temp != null && temp.length > 0) {
+                        String questionName = temp[0];
+                        String point = temp[1];
+                        Double pointCorrect = entry.getValue();
+                        if (entry.getValue() > 0.0) {
+                            totalPoint += entry.getValue();
+                            correctQuestionCount++;
+                            listQuestions.put(questionName + ":Success", pointCorrect + "/" + point);
+                        } else {
+                            listQuestions.put(entry.getKey() + ":Failed", "0/" + point);
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
