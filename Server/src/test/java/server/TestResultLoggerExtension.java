@@ -113,15 +113,12 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
         try {
             studentPointDto = setResult(studentPointDto);
         } catch (Exception e) {
-            e.printStackTrace();
             if (studentPointDto == null) {
                 studentPointDto = new StudentPointDto();
             }
             System.out.println("Error occured");
-            studentPointDto.setEvaluateTime(getCurTime());
             studentPointDto.setStudentCode(getStudentCode());
-            System.out.println(e.getMessage() + "------ afterAll ------------------");
-            studentPointDto.setErrorMsg("System errorr!");
+            studentPointDto.setErrorMsg("System error!");
         } finally {
             try {
                 String path = PROJECT_DIR.replace("\\Server", "") + File.separator + TXT_RESULT_NAME;
@@ -170,28 +167,21 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
         double totalPoint = 0;
         Integer correctQuestionCount = 0;
         String studentCode = getStudentCode();
-        System.out.println(studentCode + "--- Student code");
         try {
-            if (testResultsStatus != null && testResultsStatus.size() > 0) {
-                System.out.println(testResultsStatus + "testResultsStatus");
-                for (Map.Entry<String, Double> entry : testResultsStatus.entrySet()) {
-                    String[] temp = entry.getKey().split("-");
-                    if (temp != null && temp.length > 0) {
-                        String questionName = temp[0];
-                        String point = temp[1];
-                        Double pointCorrect = entry.getValue();
-                        if (entry.getValue() > 0.0) {
-                            totalPoint += entry.getValue();
-                            correctQuestionCount++;
-                            listQuestions.put(questionName + ":Success", pointCorrect + "/" + point);
-                        } else {
-                            listQuestions.put(entry.getKey() + ":Failed", "0/" + point);
-                        }
-                    }
+            for (Map.Entry<String, Double> entry : testResultsStatus.entrySet()) {
+                String[] temp = entry.getKey().split("-");
+                String questionName = temp[0];
+                String point = temp[1];
+                Double pointCorrect = entry.getValue();
+                if (entry.getValue() > 0.0) {
+                    totalPoint += entry.getValue();
+                    correctQuestionCount++;
+                    listQuestions.put(questionName + ":Success", pointCorrect + "/" + point);
+                } else {
+                    listQuestions.put(entry.getKey() + ":Failed", "0/" + point);
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "------ setResult ------------------");
             e.printStackTrace();
         }
         // Send TCP messages to Lec-app after finish evaluate
@@ -210,32 +200,18 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
     }
 
     public static String getStudentCode() {
-        try {
-            String path = PATH_JAVA_FOLDER_TEST;
-            System.out.println(path);
-            File folder = new File(path);
-            System.out.println("----------------------------");
-            File[] listOfFiles = folder.listFiles();
-            System.out.println(listOfFiles.length);
-            for (File file : listOfFiles) {
-                if (file.isFile()) {
-                    String s = file.getName();
-                    System.out.println("File name: " + s);
-                    if (s.contains(PREFIX_TEST)) {
-                        String[] arr = s.split("_");
-                        if (arr != null && arr.length > 0) {
-                            for (int i = 0; i < arr.length; i++) {
-                                System.out.println("Arr: " + arr[i]);
-                            }
-                            return arr[1];
-                        }
-                    }
+        String path = PATH_JAVA_FOLDER_TEST;
+        System.out.println(path);
+        File folder = new File(path);
+        File[] listOfFiles = folder.listFiles();
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                String s = file.getName();
+                if (s.contains(PREFIX_TEST)) {
+                    String[] arr = s.split("_");
+                    return arr[1];
                 }
             }
-            System.out.println("----------------------------");
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + "------ getStudentCode ------------------");
-            e.printStackTrace();
         }
         return "";
     }
