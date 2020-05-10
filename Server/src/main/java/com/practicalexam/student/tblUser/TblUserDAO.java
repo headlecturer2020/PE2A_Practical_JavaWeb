@@ -20,36 +20,36 @@ public class TblUserDAO {
     
     public boolean checkLogin(String username, String password) throws ClassNotFoundException, NamingException, SQLException {
 
-        Connection con = null;
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        String sql = "select userId from tbl_User where userId = ? and password = ?";
-        try {
-            int passwordInt = Integer.parseInt(password.trim());
-            con = DBUtilities.makeConnection();
-            pstm = con.prepareStatement(sql);
-            pstm.setString(1, username);
-            pstm.setInt(2, passwordInt);
-            rs = pstm.executeQuery();
+       // Connection con = null;
+        //PreparedStatement pstm = null;
+       // ResultSet rs = null;
+       // String sql = "select userId from tbl_User where userId = ? and password = ?";
+       // try {
+         //   int passwordInt = Integer.parseInt(password.trim());
+          //  con = DBUtilities.makeConnection();
+          //  pstm = con.prepareStatement(sql);
+           // pstm.setString(1, username);
+          //  pstm.setInt(2, passwordInt);
+          //  rs = pstm.executeQuery();
             
-            if (rs.next()) {
-                return true;
-            }
+          //  if (rs.next()) {
+           //     return true;
+        //    }
             
             
-        } finally {
+       // } finally {
             
-            if (con != null) {
-                con.close();
-            }
-            if (pstm != null) {
-                pstm.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
+         //   if (con != null) {
+           //     con.close();
+           // }
+           // if (pstm != null) {
+           //     pstm.close();
+         //   }
+           // if (rs != null) {
+            //    rs.close();
+          //  }
             
-        }
+       // }
         return false;
     }
 
