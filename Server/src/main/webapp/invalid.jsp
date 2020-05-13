@@ -18,4 +18,3 @@ and open the template in the editor.
         <a href="try">Click here to try again !</a>
     </body>
 </html>
- 
