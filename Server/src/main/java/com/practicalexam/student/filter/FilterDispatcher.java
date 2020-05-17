@@ -96,11 +96,9 @@ public class FilterDispatcher implements Filter {
             }
             RequestDispatcher rd = req.getRequestDispatcher(url);
             rd.forward(request, response);
-
         } else {
             chain.doFilter(request, response);
         }
-
     }
 
     /**
