@@ -46,7 +46,6 @@ public class LoadDataServlet extends HttpServlet {
                 listWeapon = dao.getListWeapon();
             }
             request.setAttribute("LISTWEAPON", listWeapon);
-            
         } catch (ClassNotFoundException ex) {
             log("ClassNotFoundException: " + ex.getMessage());
         } catch (NamingException ex) {
@@ -54,7 +53,6 @@ public class LoadDataServlet extends HttpServlet {
         } catch (SQLException ex) {
             log("SQLException: " + ex.getMessage());
         } finally {
-            
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

@@ -32,7 +32,7 @@ public class FilterDispatcher implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public FilterDispatcher() {
+    public FilterDispatcher() {  
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
