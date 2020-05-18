@@ -30,7 +30,7 @@ public class DeleteServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "";
         try {
-            // get id
+            // get id ok
             String id = request.getParameter("idDelete");
             TblWeaponDAO dao = new TblWeaponDAO();
             boolean check =  dao.deleteAmour(id);
