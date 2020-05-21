@@ -5,6 +5,9 @@
  */
 package com.practicalexam.student.filter;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -21,8 +24,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Dell     
+ * @author Dell
  */
+@Component
 public class FilterDispatcher implements Filter {
 
     private static final boolean debug = true;
@@ -32,7 +36,7 @@ public class FilterDispatcher implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public FilterDispatcher() {  
+    public FilterDispatcher() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
@@ -96,9 +100,11 @@ public class FilterDispatcher implements Filter {
             }
             RequestDispatcher rd = req.getRequestDispatcher(url);
             rd.forward(request, response);
+
         } else {
             chain.doFilter(request, response);
         }
+
     }
 
     /**

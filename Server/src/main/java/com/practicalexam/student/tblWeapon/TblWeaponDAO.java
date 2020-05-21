@@ -25,7 +25,7 @@ public class TblWeaponDAO {
     List<TblWeaponDTO> listWeapon;
 
     public List<TblWeaponDTO> getListWeapon() {
-        return listWeapon; 
+        return listWeapon;
     }
     
     public int showAll() throws ClassNotFoundException, NamingException, SQLException {

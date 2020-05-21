@@ -6,11 +6,18 @@
 package com.practicalexam.student.controller;
 
 import com.practicalexam.student.tblWeapon.TblWeaponDAO;
+import com.practicalexam.student.tblWeapon.TblWeaponDTO;
+
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Dell
